@@ -1,0 +1,12 @@
+body {
+  background-color: rgb(114, 114, 231);
+  color: red;
+}
+.nav-bar{
+  
+  background: rgb(59, 12, 190);
+  height:30px;
+  padding: 10px;
+  color: yellow;
+  font-size: large;
+}
