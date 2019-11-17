@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-const request = require('request')
-
+import SearchResults from './SearchResults'
 class SearchBar extends Component {
     constructor() {
         super()
@@ -24,24 +22,45 @@ class SearchBar extends Component {
         }
     }
     startSearch = async () => {
+        let topSearched = localStorage.getItem('topSearched') ? localStorage.getItem('topSearched') : []
+        let n = JSON.parse(localStorage.getItem('topSearchedCount'))
+        // n = JSON.parse(n)
+        if(topSearched!=='null'){
+            topSearched = JSON.parse(topSearched)
+            if( !topSearched.includes(this.state.search) ){
+                topSearched[n%10]=this.state.search
+                n++
+            }
+        }
+        else{
+           topSearched = [this.state.search]
+           n++ 
+        }
 
+        localStorage.setItem('topSearched', JSON.stringify(topSearched))
+        localStorage.setItem('topSearchedCount', n)
         if (localStorage.getItem('option') === 'true') { // true for search by Title
-            console.log('search by query') 
             this.props.getDataFromAPIByQuery(this.state.search)
         }
         else { // else for search by tag name
-            console.log('search by tag')
-                this.props.getDataFromAPIByTag(this.state.search)
-            }
-          
+            this.props.getDataFromAPIByTag(this.state.search)
+        }
+
     }
     render() {
         return (
-            <div className="searchBar">
-                <input className="searchInput" placeholder="Search..." value={this.state.search} onChange={this.handleChanges} />
-                <button className="search" onClick={this.startSearch}><i className="fa fa-search"></i></button>
-                <button className="searchOption" value="title" onClick={this.changeSearchOption}>Title</button>
-                <button className="searchOption" value="tag" onClick={this.changeSearchOption}>Tag</button>
+            <div>
+                <div className="searchBar">
+                    <input className="searchInput" placeholder="Search..." value={this.state.search} onChange={this.handleChanges} />
+                    <button className="search" onClick={this.startSearch}><i className="fa fa-search"></i></button>
+                    <button className="searchOption" value="title" onClick={this.changeSearchOption}>Title</button>
+                    <button className="searchOption" value="tag" onClick={this.changeSearchOption}>Tag</button>
+                </div>
+                <div>
+                    {this.props.data? 
+                        this.props.data.map(x => 
+                            <SearchResults post={x} /> ) : null}
+                </div>
             </div>
         )
     }

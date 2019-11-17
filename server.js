@@ -41,8 +41,7 @@ app.get('/users/' , function(req, res){
     console.log(UserName + ", " + Password)
     User.find({UserName : UserName, Password : Password}).exec(function(err, user){
         console.log(user)
-        if(user!==[]){ res.send(true) }
-        else { res.send(false)}
+        res.send(user)
     })
 })
     

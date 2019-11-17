@@ -12,7 +12,6 @@ export class Login extends Component {
     }
     handleChange = async (e) => {
         await this.setState({ [e.target.name]: e.target.value })
-        console.log(this.state)
     }
     CheckForUserInDB = () => {
         this.props.CheckForUserInDB(this.state)
