@@ -167,14 +167,36 @@ color: yellow;
   grid-area: u;
   padding:10px;
   justify-self: flex-end;
-
 }
 .postDown{
   grid-area: d;
   padding:10px;
-
 }
 .postPhoto{
   grid-area: p;
   justify-self: center;
+}
+.signup-form{
+margin-left:43%;
+margin-top: 5%;
+padding: 20px;
+background-color: rgb(65, 146, 252);
+border-radius: 0.7rem;
+width: fit-content;
+}
+.submit{
+  top:10px;
+  left: 60px;
+}
+.login{
+  margin-left:43%;
+  margin-top: 5%;
+  padding: 20px;
+  background-color: rgb(65, 146, 252);
+  border-radius: 0.7rem;
+  width: fit-content;
+}
+.logSubmit{
+  top:10px;
+  left:80px;
 }

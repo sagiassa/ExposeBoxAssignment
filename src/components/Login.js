@@ -23,24 +23,24 @@ export class Login extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="login">
                 <div>
                     <TextField
                         name="UserName"
-                        hintText="example123"
+                        placeholder="example123"
                         value={this.state.firstName} onChange={this.handleChange}
-                        floatingLabelText="First Name"
+                        label="User Name"
                     />
                 </div>
                 <div>
                     <TextField
                         name="Password"
                         value={this.state.firstName} onChange={this.handleChange}
-                        floatingLabelText="password"
+                        label="Password"
                         type="password"
                     />
                 </div>
-                <Fab variant="extended" aria-label="like" className="submit" >
+                <Fab variant="extended" aria-label="like" className="logSubmit" >
                     <Link to='/SearchBar' onClick={this.CheckForUserInDB}> Login </Link>
                 </Fab>
             </div>

@@ -44,35 +44,35 @@ class Registration extends Component {
         return (
             <div>
                 <form class="signup-form">
-                    <div>
+                    <div> 
                         <TextField
                             name="FullName"
-                            hintText="Bob Marly"
+                            placeholder="Bob Marly"
                             value={this.state.firstName} onChange={this.handleChange}
-                            floatingLabelText="Full Name"
+                            label="Full Name"
                         />
                     </div>
                     <div>
                         <TextField
                             name="Email"
-                            hintText="example@mail.com"
+                            placeholder="example@mail.com"
                             value={this.state.mail} onChange={this.handleChange}
-                            floatingLabelText="Email"
+                            label="Email"
                         />
                     </div>
                     <div>
                         <TextField
                             name="UserName"
-                            hintText="example123"
+                            placeholder="example123"
                             value={this.state.firstName} onChange={this.handleChange}
-                            floatingLabelText="First Name"
+                            label="User Name"
                         />
                     </div>
                     <div>
                         <TextField
                             name="Password"
+                            label="Password"
                             value={this.state.firstName} onChange={this.handleChange}
-                            floatingLabelText="password"
                             type="password"
                         />
                     </div>
