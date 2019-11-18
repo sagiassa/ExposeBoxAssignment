@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Redirect } from 'react-router-dom';
 import { throwStatement } from '@babel/types'
 
 class SearchResults extends Component {
     constructor() {
         super()
         this.state = {
-            post: null
+            post: null,
+            clickedFordetails : false
         }
     }
     componentWillMount = () => {
         this.setState({ post: this.props.post })
     }
     GetMoreDetails = () => {
-        console.log(this.state.post)
+        this.setState({ clickedFordetail : true })
     }
 
     render() {
@@ -27,7 +29,8 @@ class SearchResults extends Component {
                         : <img src={post.images.image460.url} />}
                 </div>
 
-                <div> {post.type} </div>
+                <div className="type"> {post.type} </div>
+                {this.state.clickedFordetails ? <Redirect to='/DetailsPage' post={this.state.post} /> : null }
             </div>)
     }
 }

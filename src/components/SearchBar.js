@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import SearchResults from './SearchResults'
+import PopUp from './PopUp'
 class SearchBar extends Component {
     constructor() {
         super()
         this.state = {
             search: '',
-            data: null
+            data: null,
+            showTopten : false
         }
     }
     handleChanges = async (e) => {
@@ -24,7 +26,6 @@ class SearchBar extends Component {
     startSearch = async () => {
         let topSearched = localStorage.getItem('topSearched') ? localStorage.getItem('topSearched') : []
         let n = JSON.parse(localStorage.getItem('topSearchedCount'))
-        // n = JSON.parse(n)
         if(topSearched!=='null'){
             topSearched = JSON.parse(topSearched)
             if( !topSearched.includes(this.state.search) ){
@@ -45,7 +46,15 @@ class SearchBar extends Component {
         else { // else for search by tag name
             this.props.getDataFromAPIByTag(this.state.search)
         }
-
+    }
+    showTopTenTerms = () => {
+        if(localStorage.getItem('topSearched')!=='null')
+         this.setState({ showTopTerms : true })
+        else
+            alert("No terms have been searched")
+    }
+    closeTopTerms =  () => {
+        this.setState({ showTopTerms : false })
     }
     render() {
         return (
@@ -55,8 +64,12 @@ class SearchBar extends Component {
                     <button className="search" onClick={this.startSearch}><i className="fa fa-search"></i></button>
                     <button className="searchOption" value="title" onClick={this.changeSearchOption}>Title</button>
                     <button className="searchOption" value="tag" onClick={this.changeSearchOption}>Tag</button>
+                    <div><button className="topTenSearchTerms" onClick={this.showTopTenTerms} >Top 10 Searhed terms</button></div>
                 </div>
-                <div>
+                {this.state.showTopTerms ? 
+                    <PopUp closeTopTerms={this.closeTopTerms}/>
+                : null}
+                <div className="postsContainer">
                     {this.props.data? 
                         this.props.data.map(x => 
                             <SearchResults post={x} /> ) : null}

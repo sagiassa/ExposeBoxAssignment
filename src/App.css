@@ -10,3 +10,37 @@ body {
   color: yellow;
   font-size: large;
 }
+#popUp-Box{
+height: fit-content;
+width:250px;
+position: fixed;
+background-color: rgba(88, 88, 252, 0.842);
+left: 450px;
+padding: 50px;
+top: 200px;
+border-radius: 15px;
+margin: auto;
+}
+.postsContainer{
+  margin-left: 30%;
+  padding: 20px;
+  
+
+}
+.postDisplay{
+  display: grid;
+  grid-template-areas: 
+  't . .'
+  'i i i'
+  '. . p';
+}
+.title{
+  grid-area: t;
+}
+.image{
+  grid-area: i;
+  justify-self: center;
+}
+.type{
+  grid-area: p;
+}

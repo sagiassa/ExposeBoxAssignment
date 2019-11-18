@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import SearchBar from './components/SearchBar'
 import Login from './components/Login'
 import Logout from './components/Logout'
@@ -41,7 +41,8 @@ class App extends Component {
     if (data.data.length > 0) {
       localStorage.setItem('user', true)
       this.setState({ user: true })
-    } else {
+    } 
+    else {
       localStorage.setItem('user', false)
       alert("Hey, You need to Register first")
     }
@@ -49,7 +50,6 @@ class App extends Component {
   Logout = () => {
     localStorage.setItem('user', false)
     this.setState({ user : false })
-    
   }
   render() {
     return (

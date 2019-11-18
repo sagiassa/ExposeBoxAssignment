@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 
+
 export class Login extends Component {
     constructor() {
         super()
@@ -37,7 +38,7 @@ export class Login extends Component {
                 </div>
                 <Fab variant="extended" aria-label="like" className="submit" onClick={this.CheckForUserInDB}>
                     {/* <NavigationIcon className="icon" /> */}
-                    Login
+                    Login 
                     </Fab>
             </div>
         )
