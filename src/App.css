@@ -30,12 +30,15 @@ margin: auto;
 .postDisplay{
   display: grid;
   grid-template-areas: 
-  't . .'
+  't . d'
   'i i i'
   '. . p';
 }
 .title{
   grid-area: t;
+}
+.details{
+  grid-area: d;
 }
 .image{
   grid-area: i;

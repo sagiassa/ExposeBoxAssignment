@@ -6,6 +6,8 @@ import SearchBar from './components/SearchBar'
 import Login from './components/Login'
 import Logout from './components/Logout'
 import Registration from './components/Registration'
+import DetailsPage from './components/DetailsPage'
+import { declareTypeAlias } from '@babel/types';
 
 class App extends Component {
   constructor() {
@@ -17,8 +19,10 @@ class App extends Component {
   }
   componentDidMount = () => {
     localStorage.setItem('option', true)
-    localStorage.setItem('topSearched', null)
-    localStorage.setItem('topSearchedCount', 0)
+    if(!localStorage.getItem('topSearched')){
+      localStorage.setItem('topSearched', null)
+      localStorage.setItem('topSearchedCount', 0)
+    }
 
   }
   getDataFromAPIByTag = async (param) => {
@@ -70,6 +74,7 @@ class App extends Component {
           <Route path='/Register' exact render={() => <Registration AddUserToDB={this.AddUserToDB} />} />
           <Route path='/Login' exact render={() => <Login CheckForUserInDB={this.CheckForUserInDB} />} />
           <Route path='/Logout' exact render={() => <Logout Logout={this.Logout} /> } />
+          <Route path='/DetailsPage' exact render={() => <DetailsPage />} />
         </div>
 
       </Router>

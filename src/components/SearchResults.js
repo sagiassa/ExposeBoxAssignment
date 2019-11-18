@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Redirect } from 'react-router-dom';
-import { throwStatement } from '@babel/types'
-
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
+import DetailsPage from './DetailsPage'
 class SearchResults extends Component {
     constructor() {
         super()
@@ -13,16 +12,17 @@ class SearchResults extends Component {
     componentWillMount = () => {
         this.setState({ post: this.props.post })
     }
-    GetMoreDetails = () => {
-        this.setState({ clickedFordetail : true })
+    GetMoreDetails = async  () => {
+        await this.setState({ clickedFordetails : true })
+        let post = this.state.post
+        await localStorage.setItem('Post', JSON.stringify(post))
     }
 
     render() {
         let post = this.props.post
         return (
-            <div className="postDisplay" onClick={this.GetMoreDetails}>
-                <div className="title"> {post.title} </div>
-
+            <div className="postDisplay" >
+                <div className="title" > {post.title} </div>
                 <div className="image">
                     {post.type === "Animated" ?
                         <video controls src={post.images.image460sv.url} type="video/mp4" />
@@ -30,7 +30,7 @@ class SearchResults extends Component {
                 </div>
 
                 <div className="type"> {post.type} </div>
-                {this.state.clickedFordetails ? <Redirect to='/DetailsPage' post={this.state.post} /> : null }
+                <div className="details" onClick={this.GetMoreDetails}> <Link to='/DetailsPage'>Get More Details</Link> </div>
             </div>)
     }
 }

@@ -1,21 +1,25 @@
 import React, { Component } from 'react'
+import { BrowserRouter as  Redirect } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
-
 
 export class Login extends Component {
     constructor() {
         super()
         this.state = {
-            UserName: null,
-            Password: null
+            UserName : null,
+            Password : null,
+            user : false
         }
     }
     handleChange = async (e) => {
         await this.setState({ [e.target.name]: e.target.value })
     }
-    CheckForUserInDB = () => {
-        this.props.CheckForUserInDB(this.state)
+    CheckForUserInDB = async () => {
+        await this.props.CheckForUserInDB(this.state)
+        if(localStorage.getItem('user') === 'true'){
+            await this.setState({ user : true })
+        }
     }
     render() {
         return (
@@ -40,6 +44,7 @@ export class Login extends Component {
                     {/* <NavigationIcon className="icon" /> */}
                     Login 
                     </Fab>
+                {this.state.user === 'true' ? <Redirect to='/SearchBar' /> : null }
             </div>
         )
     }
