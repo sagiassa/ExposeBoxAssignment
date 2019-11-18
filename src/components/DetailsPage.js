@@ -7,10 +7,12 @@ class DetailsPage extends Component{
             post : null
         }
     }
-
-    render(){
+    componentWillMount = async () => {
         let post = JSON.parse(localStorage.getItem('Post'))
-        console.log(post)
+        await this.setState({ post : post })
+    }
+    render(){
+        let post = this.state.post
         return(
 
             <div className="postDetails">

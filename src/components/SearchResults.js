@@ -5,14 +5,12 @@ class SearchResults extends Component {
         super()
         this.state = {
             post: null,
-            clickedFordetails : false
         }
     }
     componentWillMount = () => {
         this.setState({ post: this.props.post })
     }
     GetMoreDetails = async  () => {
-        await this.setState({ clickedFordetails : true })
         let post = this.state.post
         await localStorage.setItem('Post', JSON.stringify(post))
     }
@@ -29,7 +27,7 @@ class SearchResults extends Component {
                 </div>
 
                 <div className="type"> {post.type} </div>
-                <div className="details" onClick={this.GetMoreDetails}> <Link to='/DetailsPage'>Get More Details</Link> </div>
+                <div className="details" > <Link to='/DetailsPage' onClick={this.GetMoreDetails}>Get More Details here</Link> </div>
             </div>)
     }
 }
