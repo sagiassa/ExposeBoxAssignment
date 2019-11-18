@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as  Redirect } from 'react-router-dom';
+import { BrowserRouter as  Redirect, Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 
@@ -40,11 +40,12 @@ export class Login extends Component {
                         type="password"
                     />
                 </div>
+
+                {this.state.user === 'true' ? <Link to='/SearchBar' > Start Search </Link> : 
                 <Fab variant="extended" aria-label="like" className="submit" onClick={this.CheckForUserInDB}>
                     {/* <NavigationIcon className="icon" /> */}
-                    Login 
-                    </Fab>
-                {this.state.user === 'true' ? <Redirect to='/SearchBar' /> : null }
+                    Login
+        </Fab> }
             </div>
         )
     }

@@ -4,7 +4,6 @@ import axios from 'axios'
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import SearchBar from './components/SearchBar'
 import Login from './components/Login'
-import Logout from './components/Logout'
 import Registration from './components/Registration'
 import DetailsPage from './components/DetailsPage'
 import { declareTypeAlias } from '@babel/types';
@@ -62,18 +61,17 @@ class App extends Component {
           <div className="nav-bar">
             {this.state.user ? <div>
               <Link to='/SearchBar'> Search </Link>
-              <Link to='/Logout'> Logout </Link> </div>
+              <Link to='/SearchBar' onClick={this.Logout}> Logout </Link> </div>
               : <div>
                 <Link to='/SearchBar'> Search </Link>
                 <Link to='/Register'>Register</Link>
-                <Link to='/Login'> Login </Link>
+                <Link to='/Login' > Login </Link>
               </div>}
           </div>
           <Route path='/' exact render={() => <SearchBar data={this.state.data} getDataFromAPIByTag={this.getDataFromAPIByTag} getDataFromAPIByQuery={this.getDataFromAPIByQuery} />} />
           <Route path='/SearchBar' exact render={() => <SearchBar data={this.state.data} getDataFromAPIByTag={this.getDataFromAPIByTag} getDataFromAPIByQuery={this.getDataFromAPIByQuery} />} />
           <Route path='/Register' exact render={() => <Registration AddUserToDB={this.AddUserToDB} />} />
           <Route path='/Login' exact render={() => <Login CheckForUserInDB={this.CheckForUserInDB} />} />
-          <Route path='/Logout' exact render={() => <Logout Logout={this.Logout} /> } />
           <Route path='/DetailsPage' exact render={() => <DetailsPage />} />
         </div>
 
