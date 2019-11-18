@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as  Redirect, Link } from 'react-router-dom';
+import { BrowserRouter as Redirect, Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 
@@ -7,9 +7,9 @@ export class Login extends Component {
     constructor() {
         super()
         this.state = {
-            UserName : null,
-            Password : null,
-            user : false
+            UserName: null,
+            Password: null,
+            user: false
         }
     }
     handleChange = async (e) => {
@@ -17,8 +17,8 @@ export class Login extends Component {
     }
     CheckForUserInDB = async () => {
         await this.props.CheckForUserInDB(this.state)
-        if(localStorage.getItem('user') === 'true'){
-            await this.setState({ user : true })
+        if (localStorage.getItem('user') === 'true') {
+            await this.setState({ user: true })
         }
     }
     render() {
@@ -40,12 +40,9 @@ export class Login extends Component {
                         type="password"
                     />
                 </div>
-
-                {this.state.user === 'true' ? <Link to='/SearchBar' > Start Search </Link> : 
-                <Fab variant="extended" aria-label="like" className="submit" onClick={this.CheckForUserInDB}>
-                    {/* <NavigationIcon className="icon" /> */}
-                    Login
-        </Fab> }
+                <Fab variant="extended" aria-label="like" className="submit" >
+                    <Link to='/SearchBar' onClick={this.CheckForUserInDB}> Login </Link>
+                </Fab>
             </div>
         )
     }

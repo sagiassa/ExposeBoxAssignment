@@ -38,9 +38,7 @@ app.post('/users' , function(req, res){
 app.get('/users/' , function(req, res){
     let UserName = req.query.userName
     let Password = req.query.password
-    console.log(UserName + ", " + Password)
     User.find({UserName : UserName, Password : Password}).exec(function(err, user){
-        console.log(user)
         res.send(user)
     })
 })

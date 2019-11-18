@@ -43,11 +43,11 @@ class App extends Component {
     let data = await axios.get('http://localhost:3030/users/', { params: { userName: user.UserName, password: user.Password } })
     if (data.data.length > 0) {
       localStorage.setItem('user', true)
-      this.setState({ user: true })
+      await this.setState({ user : true })
     } 
     else {
       localStorage.setItem('user', false)
-      alert("Hey, You need to Register first")
+      alert("Hey, something is wrong, please try again or register ")
     }
   }
   Logout = () => {

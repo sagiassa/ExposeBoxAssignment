@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
+
 import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 
@@ -9,25 +11,33 @@ class Registration extends Component {
             FullName: null,
             Email: null,
             UserName: null,
-            Password: null
+            Password: null,
+            user: false
         }
     }
     handleChange = async (e) => {
         await this.setState({ [e.target.name]: e.target.value })
     }
     TrnsferUserToDB = () => {
-        if (this.state.Email.includes('@') && this.state.FullName && this.state.UserName && this.state.Password) {
-            let user = {
-                FullName: this.state.FullName,
-                Email: this.state.Email,
-                UserName: this.state.UserName,
-                Password: this.state.Password
+        if (this.state.Email && this.state.FullName && this.state.UserName && this.state.Password) {
+            if (this.state.Email.includes('@')) {
+                let user = {
+                    FullName: this.state.FullName,
+                    Email: this.state.Email,
+                    UserName: this.state.UserName,
+                    Password: this.state.Password
+                }
+                this.props.AddUserToDB(user)
+                this.setState({ user: true })
+                this.StartSearching()
+            } else {
+                alert('Hey, check your mail input please, @ is missing')
             }
-            this.props.AddUserToDB(user)
-            alert(this.state.FullName + ", you registered Successfully")
         } else {
             alert('Hey, check your inputs please, somthing is wrong or missing')
         }
+    }
+    StartSearching = () => {
 
     }
     render() {
@@ -66,9 +76,8 @@ class Registration extends Component {
                             type="password"
                         />
                     </div>
-                    <Fab variant="extended" aria-label="like" className="submit" onClick={this.TrnsferUserToDB}>
-                        {/* <NavigationIcon className="icon" /> */}
-                        Register
+                    <Fab variant="extended" aria-label="like" className="submit" >
+                        <Link to="/SearchBar" onClick={this.TrnsferUserToDB} > Register</Link>
                     </Fab>
                 </form>
             </div>
