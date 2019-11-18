@@ -86,13 +86,13 @@ body {
   font-family: 'Noto Serif', serif;
 }
 #popUp-Box{
+position: absolute;
 height: fit-content;
 width:220px;
-position: fixed;
 background-color: black;
 left: 5%;
 padding: 10px;
-top: 33%;
+top: 38%;
 font-size: 20px;
 font-family: 'Noto Serif', serif;
 color: yellow;
@@ -100,31 +100,39 @@ color: yellow;
 .close{
   margin-left: 93%;
   cursor: pointer;
-
 }
 .postsContainer{
-  margin-left: 30%;
-  padding: 20px;
-  
-
+  position:absolute;
+  top:40%;
+  left:30%;
+  width:500px;
 }
 .postDisplay{
+  margin-top:10px;
   display: grid;
   grid-template-areas: 
-  't . d'
-  'i i i'
-  '. . p';
+  't t d'
+  'i i i';
+  padding: 10px;
+  border-bottom: solid 1px blue;
 }
-.title{
+.Title{
   grid-area: t;
+  font-family: 'Noto Serif', serif;
+  font-size: 20px;
+  /* justify-self: center; */
+
 }
 .details{
   grid-area: d;
+  font-family: 'Noto Serif', serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+  justify-self: center;
 }
 .image{
   grid-area: i;
   justify-self: center;
+  padding-top:5px;
 }
-.type{
-  grid-area: p;
-}
+
