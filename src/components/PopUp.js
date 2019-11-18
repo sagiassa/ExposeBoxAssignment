@@ -12,7 +12,7 @@ class PopUp extends Component {
        let searchedTerms = JSON.parse(localStorage.getItem('topSearched'))
         return (
             <div id="popUp-Box">
-                <div className='x' onClick={this.reset}><i class="far fa-times-circle"></i></div>
+                <div className='close' onClick={this.reset}><i class="far fa-times-circle"></i></div>
                 {searchedTerms.map(x=> <li> { x }</li>)}
             </div>
             

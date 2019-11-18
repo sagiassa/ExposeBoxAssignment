@@ -17,7 +17,7 @@ class App extends Component {
     }
   }
   componentDidMount = () => {
-    localStorage.setItem('option', true)
+    localStorage.setItem('option', 'title')
     if(!localStorage.getItem('topSearched')){
       localStorage.setItem('topSearched', null)
       localStorage.setItem('topSearchedCount', 0)
@@ -58,16 +58,18 @@ class App extends Component {
     return (
       <Router>
         <div>
+            {this.state.user ? 
           <div className="nav-bar">
-            {this.state.user ? <div>
-              <Link to='/SearchBar'> Search </Link>
-              <Link to='/SearchBar' onClick={this.Logout}> Logout </Link> </div>
-              : <div>
-                <Link to='/SearchBar'> Search </Link>
-                <Link to='/Register'>Register</Link>
-                <Link to='/Login' > Login </Link>
+            <div> <Link to='/SearchBar'> Search </Link></div>
+            <div></div>
+              <div><Link to='/SearchBar' onClick={this.Logout}> Logout </Link> </div> </div>
+              : 
+          <div className="nav-bar">
+          <div> <Link to='/SearchBar'> Search </Link> </div>
+                <div><Link to='/Register'>Register</Link></div>
+               <div> <Link to='/Login' > Login </Link></div>
               </div>}
-          </div>
+          
           <Route path='/' exact render={() => <SearchBar data={this.state.data} getDataFromAPIByTag={this.getDataFromAPIByTag} getDataFromAPIByQuery={this.getDataFromAPIByQuery} />} />
           <Route path='/SearchBar' exact render={() => <SearchBar data={this.state.data} getDataFromAPIByTag={this.getDataFromAPIByTag} getDataFromAPIByQuery={this.getDataFromAPIByQuery} />} />
           <Route path='/Register' exact render={() => <Registration AddUserToDB={this.AddUserToDB} />} />

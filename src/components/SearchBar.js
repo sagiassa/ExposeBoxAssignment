@@ -6,8 +6,9 @@ class SearchBar extends Component {
         super()
         this.state = {
             search: '',
+            searchOpt: 'title',
             data: null,
-            showTopten : false
+            showTopten: false
         }
     }
     handleChanges = async (e) => {
@@ -17,44 +18,47 @@ class SearchBar extends Component {
     changeSearchOption = (e) => {
         let option = e.target.value
         if (option === "title") {
-            localStorage.setItem('option', true)
+            localStorage.setItem('option', 'title')
+            this.setState({ searchOpt : 'title'})
         }
         else {
-            localStorage.setItem('option', false)
+            localStorage.setItem('option', 'tag')
+            this.setState({ searchOpt : 'tag'})
+
         }
     }
     startSearch = async () => {
         let topSearched = localStorage.getItem('topSearched') ? localStorage.getItem('topSearched') : []
         let n = JSON.parse(localStorage.getItem('topSearchedCount'))
-        if(topSearched!=='null'){
+        if (topSearched !== 'null') {
             topSearched = JSON.parse(topSearched)
-            if( !topSearched.includes(this.state.search) ){
-                topSearched[n%10]=this.state.search
+            if (!topSearched.includes(this.state.search)) {
+                topSearched[n % 10] = this.state.search
                 n++
             }
         }
-        else{
-           topSearched = [this.state.search]
-           n++ 
+        else {
+            topSearched = [this.state.search]
+            n++
         }
 
         localStorage.setItem('topSearched', JSON.stringify(topSearched))
         localStorage.setItem('topSearchedCount', n)
-        if (localStorage.getItem('option') === 'true') { // true for search by Title
+        if (localStorage.getItem('option') === 'title') {
             this.props.getDataFromAPIByQuery(this.state.search)
         }
-        else { // else for search by tag name
+        else {
             this.props.getDataFromAPIByTag(this.state.search)
         }
     }
     showTopTenTerms = () => {
-        if(localStorage.getItem('topSearched')!=='null')
-         this.setState({ showTopTerms : true })
+        if (localStorage.getItem('topSearched') !== 'null')
+            this.setState({ showTopTerms: true })
         else
             alert("No terms have been searched")
     }
-    closeTopTerms =  () => {
-        this.setState({ showTopTerms : false })
+    closeTopTerms = () => {
+        this.setState({ showTopTerms: false })
     }
     render() {
         return (
@@ -62,17 +66,24 @@ class SearchBar extends Component {
                 <div className="searchBar">
                     <input className="searchInput" placeholder="Search..." value={this.state.search} onChange={this.handleChanges} />
                     <button className="search" onClick={this.startSearch}><i className="fa fa-search"></i></button>
-                    <button className="searchOption" value="title" onClick={this.changeSearchOption}>Title</button>
-                    <button className="searchOption" value="tag" onClick={this.changeSearchOption}>Tag</button>
-                    <div><button className="topTenSearchTerms" onClick={this.showTopTenTerms} >Top 10 Searhed terms</button></div>
+                    {this.state.searchOpt === 'title' ?
+                        <span className="searchOpt">
+                            <button className="putAnUnderline" value="title" onClick={this.changeSearchOption}>Title</button> /
+                            <button className="tag" value="tag" onClick={this.changeSearchOption}>Tag</button>
+                        </span> :
+                        <span className="searchOpt">
+                            <button className="title" value="title" onClick={this.changeSearchOption}>Title</button> /
+                            <button className="putAnUnderline" value="tag" onClick={this.changeSearchOption}>Tag</button>
+                        </span>}
                 </div>
-                {this.state.showTopTerms ? 
-                    <PopUp closeTopTerms={this.closeTopTerms}/>
-                : null}
+                <div><button className="topTenSearchTerms" onClick={this.showTopTenTerms} >Top 10 Searhed terms</button></div>
+                {this.state.showTopTerms ?
+                    <PopUp closeTopTerms={this.closeTopTerms} />
+                    : null}
                 <div className="postsContainer">
-                    {this.props.data? 
-                        this.props.data.map(x => 
-                            <SearchResults post={x} /> ) : null}
+                    {this.props.data ?
+                        this.props.data.map(x =>
+                            <SearchResults post={x} />) : null}
                 </div>
             </div>
         )
