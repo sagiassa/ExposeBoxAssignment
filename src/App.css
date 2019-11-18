@@ -135,4 +135,46 @@ color: yellow;
   justify-self: center;
   padding-top:5px;
 }
+.postDetails{
+  position:absolute;
+  display:grid;
+  grid-template-areas: 
+  'i . t '
+  'p p p'
+  'p p p'
+  'd . u';
+  width: fit-content;
+  left:30%;
+  margin-top:3%;
+  padding: 20px;
+  font-size: 20px;
+  font-family: 'Acme', sans-serif;
+  background-color: black;
+  color:yellow;
+  border-radius: 0.7rem;
 
+}
+.postId{
+  grid-area: i;
+  padding:10px;
+
+}
+.postTitle{
+  grid-area: t;
+  padding:10px;
+}
+.postUp{
+  grid-area: u;
+  padding:10px;
+  justify-self: flex-end;
+
+}
+.postDown{
+  grid-area: d;
+  padding:10px;
+
+}
+.postPhoto{
+  grid-area: p;
+  justify-self: center;
+}

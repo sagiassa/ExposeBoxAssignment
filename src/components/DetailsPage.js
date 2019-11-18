@@ -16,11 +16,11 @@ class DetailsPage extends Component{
         return(
 
             <div className="postDetails">
-                <div> {post.id} </div>
-                <div> {post.title} </div>
-                <div> {post.upVoteCount} </div>
-                <div> {post.downVoteCount} </div>
-                <div className="image">
+                <div className="postId" >  ID : {post.id} </div>
+                <div className="postTitle"> Title :  {post.title} </div>
+                <div className="postUp"> {post.upVoteCount} <i class="far fa-thumbs-up"></i> </div>
+                <div className="postDown"> {post.downVoteCount} <i class="far fa-thumbs-down"></i></div>
+                <div className="postPhoto">
                     {post.type === "Animated" ?
                         <video controls src={post.images.image460sv.url} type="video/mp4" />
                         : <img src={post.images.image460.url} />}
