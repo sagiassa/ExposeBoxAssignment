@@ -76,7 +76,7 @@ class SearchBar extends Component {
                             <button className="putAnUnderline" value="tag" onClick={this.changeSearchOption}>Tag</button>
                         </span>}
                 </div>
-                <div><button className="topTenSearchTerms" onClick={this.showTopTenTerms} >Top 10 Searhed terms</button></div>
+                <div><button className="topTenSearchTerms" onClick={this.showTopTenTerms} >Top 10 Searched terms</button></div>
                 {this.state.showTopTerms ?
                     <PopUp closeTopTerms={this.closeTopTerms} />
                     : null}
