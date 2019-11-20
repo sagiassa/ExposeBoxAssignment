@@ -5,6 +5,8 @@ const User = require('./src/mongoose/UserModel')
 const PORT = 3030
 const mongoose = require('mongoose')
 const axios = require('axios')
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb://project:project@sagi-shard-00-00-nbwa0.mongodb.net:27017,sagi-shard-00-01-nbwa0.mongodb.net:27017,sagi-shard-00-02-nbwa0.mongodb.net:27017/test?ssl=true&replicaSet=Sagi-shard-0&authSource=admin&retryWrites=true&w=majority";
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -42,10 +44,15 @@ app.get('/users/' , function(req, res){
         res.send(user)
     })
 })
-    
 
 
-mongoose.connect( "mongodb://localhost/ExposeBoxUserDB", { useNewUrlParser: true })
+// MongoClient.connect(uri, function(err, client) {
+//   const collection = client.db("ExposeBox").collection("users");
+//   // perform actions on the collection object
+//   client.close();
+// });
+
+mongoose.connect( uri, { useNewUrlParser: true })
 app.listen( PORT, function(err, res){
     console.group("the server runs on port " + PORT)
 })
